@@ -34,6 +34,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#define write msx_write
 
 typedef struct {
     int deviceHandle;

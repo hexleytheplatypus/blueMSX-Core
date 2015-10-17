@@ -25,6 +25,7 @@
 **
 ******************************************************************************
 */
+
 #include "VDP.h"
 #include "V9938.h"
 #include "Board.h"
@@ -40,6 +41,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define sync msx_sync
 
 //#define ENABLE_VRAM_DECAY
 // Global configuration (not device specific)
