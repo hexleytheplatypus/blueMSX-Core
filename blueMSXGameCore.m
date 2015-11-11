@@ -287,8 +287,6 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 
 - (void)startEmulation
 {
-    [super startEmulation];
-    
     // propertiesSetDirectory("", "");
     // tapeSetDirectory("/Cassettes", "");
 
@@ -301,6 +299,8 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     boardSetDirectory([[self batterySavesDirectoryPath] UTF8String]);
 
     tryLaunchUnknownFile(properties, [fileToLoad UTF8String], NO);
+
+    [super startEmulation];
 }
 
 - (void)stopEmulation
