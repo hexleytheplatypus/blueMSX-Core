@@ -163,7 +163,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     properties->emulation.speed = 50;
     properties->emulation.syncMethod = P_EMU_SYNCTOVBLANKASYNC;
     properties->emulation.enableFdcTiming = YES;
-    properties->emulation.vdpSyncMode = 0;
+    properties->emulation.vdpSyncMode = P_VDP_SYNCAUTO;
     
     properties->video.brightness = 100;
     properties->video.contrast = 100;
@@ -172,8 +172,8 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     properties->video.colorSaturationWidth = 0;
     properties->video.colorSaturationEnable = NO;
     properties->video.deInterlace = YES;
-    properties->video.monitorType = 0;
-    properties->video.monitorColor = 0;
+    properties->video.monitorType = P_VIDEO_PALNONE;
+    properties->video.monitorColor = P_VIDEO_COLOR;
     properties->video.scanlinesPct = 100;
     properties->video.scanlinesEnable = (properties->video.scanlinesPct < 100);
     
