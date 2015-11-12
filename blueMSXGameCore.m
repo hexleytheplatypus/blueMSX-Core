@@ -28,6 +28,7 @@
 #import <OpenEmuBase/OERingBuffer.h>
 #import <OpenGL/gl.h>
 #import "OEMSXSystemResponderClient.h"
+#import "OEColecoVisionSystemResponderClient.h"
 
 #include "ArchInput.h"
 #include "ArchNotifications.h"
@@ -66,7 +67,7 @@
 #define virtualCodeUnset(eventCode) self->virtualCodeMap[eventCode] = 0
 #define virtualCodeClear() memset(self->virtualCodeMap, 0, sizeof(self->virtualCodeMap));
 
-@interface blueMSXGameCore () <OEMSXSystemResponderClient>
+@interface blueMSXGameCore () <OEMSXSystemResponderClient, OEColecoVisionSystemResponderClient>
 {
     int virtualCodeMap[256];
     int currentScreenIndex;
@@ -119,8 +120,13 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     NSString *resourcePath = [[[self owner] bundle] resourcePath];
     
     __block NSString *machinesPath = [resourcePath stringByAppendingPathComponent:@"Machines"];
-    __block NSString *machineName = @"MSX2 - C-BIOS";
-    
+    __block NSString *machineName;
+
+    if([[self systemIdentifier] isEqualToString:@"openemu.system.colecovision"])
+        machineName = @"COL - ColecoVision";
+    else
+        machineName = @"MSX2 - C-BIOS";
+
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *supportPath = [NSURL fileURLWithPath:[self supportDirectoryPath]];
     NSURL *customMachinesPath = [supportPath URLByAppendingPathComponent:@"Machines"];
@@ -195,10 +201,18 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     properties->sound.mixerChannel[MIXER_CHANNEL_MOONSOUND].volume = 100;
     properties->sound.mixerChannel[MIXER_CHANNEL_MOONSOUND].pan = 50;
     properties->sound.mixerChannel[MIXER_CHANNEL_MOONSOUND].enable = YES;
-    
-    properties->joy1.typeId = JOYSTICK_PORT_JOYSTICK;
-    properties->joy2.typeId = JOYSTICK_PORT_JOYSTICK;
-    
+
+    if([[self systemIdentifier] isEqualToString:@"openemu.system.colecovision"])
+    {
+        properties->joy1.typeId = JOYSTICK_PORT_COLECOJOYSTICK;
+        properties->joy2.typeId = JOYSTICK_PORT_COLECOJOYSTICK;
+    }
+    else
+    {
+        properties->joy1.typeId = JOYSTICK_PORT_JOYSTICK;
+        properties->joy2.typeId = JOYSTICK_PORT_JOYSTICK;
+    }
+
     // Init video
     video = videoCreate();
     videoSetColors(video, properties->video.saturation, properties->video.brightness,
@@ -332,6 +346,142 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     
     properties->emulation.speed = flag ? 100 : 50;
     emulatorSetFrequency(properties->emulation.speed, NULL);
+}
+
+- (oneway void)didPushColecoVisionButton:(OEColecoVisionButton)button forPlayer:(NSUInteger)player;
+{
+    int code = -1;
+
+    switch (button)
+    {
+        case OEColecoVisionButtonUp:
+            code = (player == 1) ? EC_JOY1_UP : EC_JOY2_UP;
+            break;
+        case OEColecoVisionButtonDown:
+            code = (player == 1) ? EC_JOY1_DOWN : EC_JOY2_DOWN;
+            break;
+        case OEColecoVisionButtonLeft:
+            code = (player == 1) ? EC_JOY1_LEFT : EC_JOY2_LEFT;
+            break;
+        case OEColecoVisionButtonRight:
+            code = (player == 1) ? EC_JOY1_RIGHT : EC_JOY2_RIGHT;
+            break;
+        case OEColecoVisionButtonLeftAction:
+            code = (player == 1) ? EC_JOY1_BUTTON1 : EC_JOY2_BUTTON1;
+            break;
+        case OEColecoVisionButtonRightAction:
+            code = (player == 1) ? EC_JOY1_BUTTON2 : EC_JOY2_BUTTON2;
+            break;
+        case OEColecoVisionButton1:
+            code = (player == 1) ? EC_COLECO1_1 : EC_COLECO2_1;
+            break;
+        case OEColecoVisionButton2:
+            code = (player == 1) ? EC_COLECO1_2 : EC_COLECO2_2;
+            break;
+        case OEColecoVisionButton3:
+            code = (player == 1) ? EC_COLECO1_3 : EC_COLECO2_3;
+            break;
+        case OEColecoVisionButton4:
+            code = (player == 1) ? EC_COLECO1_4 : EC_COLECO2_4;
+            break;
+        case OEColecoVisionButton5:
+            code = (player == 1) ? EC_COLECO1_5 : EC_COLECO2_5;
+            break;
+        case OEColecoVisionButton6:
+            code = (player == 1) ? EC_COLECO1_6 : EC_COLECO2_6;
+            break;
+        case OEColecoVisionButton7:
+            code = (player == 1) ? EC_COLECO1_7 : EC_COLECO2_7;
+            break;
+        case OEColecoVisionButton8:
+            code = (player == 1) ? EC_COLECO1_8 : EC_COLECO2_8;
+            break;
+        case OEColecoVisionButton9:
+            code = (player == 1) ? EC_COLECO1_9 : EC_COLECO2_9;
+            break;
+        case OEColecoVisionButton0:
+            code = (player == 1) ? EC_COLECO1_0 : EC_COLECO2_0;
+            break;
+        case OEColecoVisionButtonAsterisk:
+            code = (player == 1) ? EC_COLECO1_STAR : EC_COLECO2_STAR;
+            break;
+        case OEColecoVisionButtonPound:
+            code = (player == 1) ? EC_COLECO1_HASH : EC_COLECO2_HASH;
+            break;
+        default:
+            break;
+    }
+
+    if (code != -1)
+        virtualCodeSet(code);
+}
+
+- (oneway void)didReleaseColecoVisionButton:(OEColecoVisionButton)button forPlayer:(NSUInteger)player;
+{
+    int code = -1;
+
+    switch (button)
+    {
+        case OEColecoVisionButtonUp:
+            code = (player == 1) ? EC_JOY1_UP : EC_JOY2_UP;
+            break;
+        case OEColecoVisionButtonDown:
+            code = (player == 1) ? EC_JOY1_DOWN : EC_JOY2_DOWN;
+            break;
+        case OEColecoVisionButtonLeft:
+            code = (player == 1) ? EC_JOY1_LEFT : EC_JOY2_LEFT;
+            break;
+        case OEColecoVisionButtonRight:
+            code = (player == 1) ? EC_JOY1_RIGHT : EC_JOY2_RIGHT;
+            break;
+        case OEColecoVisionButtonLeftAction:
+            code = (player == 1) ? EC_JOY1_BUTTON1 : EC_JOY2_BUTTON1;
+            break;
+        case OEColecoVisionButtonRightAction:
+            code = (player == 1) ? EC_JOY1_BUTTON2 : EC_JOY2_BUTTON2;
+            break;
+        case OEColecoVisionButton1:
+            code = (player == 1) ? EC_COLECO1_1 : EC_COLECO2_1;
+            break;
+        case OEColecoVisionButton2:
+            code = (player == 1) ? EC_COLECO1_2 : EC_COLECO2_2;
+            break;
+        case OEColecoVisionButton3:
+            code = (player == 1) ? EC_COLECO1_3 : EC_COLECO2_3;
+            break;
+        case OEColecoVisionButton4:
+            code = (player == 1) ? EC_COLECO1_4 : EC_COLECO2_4;
+            break;
+        case OEColecoVisionButton5:
+            code = (player == 1) ? EC_COLECO1_5 : EC_COLECO2_5;
+            break;
+        case OEColecoVisionButton6:
+            code = (player == 1) ? EC_COLECO1_6 : EC_COLECO2_6;
+            break;
+        case OEColecoVisionButton7:
+            code = (player == 1) ? EC_COLECO1_7 : EC_COLECO2_7;
+            break;
+        case OEColecoVisionButton8:
+            code = (player == 1) ? EC_COLECO1_8 : EC_COLECO2_8;
+            break;
+        case OEColecoVisionButton9:
+            code = (player == 1) ? EC_COLECO1_9 : EC_COLECO2_9;
+            break;
+        case OEColecoVisionButton0:
+            code = (player == 1) ? EC_COLECO1_0 : EC_COLECO2_0;
+            break;
+        case OEColecoVisionButtonAsterisk:
+            code = (player == 1) ? EC_COLECO1_STAR : EC_COLECO2_STAR;
+            break;
+        case OEColecoVisionButtonPound:
+            code = (player == 1) ? EC_COLECO1_HASH : EC_COLECO2_HASH;
+            break;
+        default:
+            break;
+    }
+
+    if (code != -1)
+        virtualCodeUnset(code);
 }
 
 - (oneway void)didPushMSXJoystickButton:(OEMSXJoystickButton)button

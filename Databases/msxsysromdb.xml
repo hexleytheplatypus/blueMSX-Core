@@ -7,7 +7,7 @@
 	© 2005-2009 openMSX team	(thanks for your help !)											 	
 	© 2004-2012 Benoit Delvaux (blueMSX co-developer)		 		  	
 -->
-<softwaredb xml:lang="en" timestamp="1352663820">
+<softwaredb xml:lang="en" timestamp="1355086800">
 <!-- MSX system roms -->
 	<software>
 		<title xml:lang="en">Al Alamiah AX-150/170 MSX1 Basic + Bios</title>
@@ -158,7 +158,7 @@
 		</dump>
 	</software>
 	<software>
-		<title xml:lang="en">Canon V-8/10/20/Casio PV-7/16/Fujitsu FM-X/Mitsubishi ML-F110/120/National CF-2000/Pioneer PX-7/V60/Sony HB-10/101/201/501/701FD/Toshiba HX-22 MSX1 Basic + Bios</title>
+		<title xml:lang="en">Canon V-8/10/20/Casio PV-7/16/Fujitsu FM-X/Mitsubishi ML-F110/120/National CF-2000/Pioneer PX-7/V60/Sony HB-10/101/201/501/701FD/Toshiba HX-10D/10S/22 MSX1 Basic + Bios</title>
 		<system>MSX</system>
 		<company>Microsoft</company>
 		<year>1983</year>
@@ -5078,7 +5078,7 @@
 		<dump>
 			<original value="false" />
 			<systemrom>
-				<type>SVI738FDC</type>
+				<type>MB8877A</type>
 				<hash algo="sha1">6aa856cc56eb98863c9da7a566571605682b5c6b</hash>
 			</systemrom>
 		</dump>
@@ -5507,7 +5507,7 @@
 		</dump>
 	</software>
 	<software>
-		<title xml:lang="en">Toshiba HX-10/10S/20/21 MSX1 Basic + Bios</title>
+		<title xml:lang="en">Toshiba HX-20/21 MSX1 Basic + Bios</title>
 		<system>MSX</system>
 		<company>Microsoft</company>
 		<year>1984</year>
@@ -5521,7 +5521,7 @@
 		</dump>
 	</software>
 	<software>
-		<title xml:lang="en">Toshiba HX-10P MSX1 Basic + Bios</title>
+		<title xml:lang="en">Toshiba HX-10 MSX1 Basic + Bios</title>
 		<system>MSX</system>
 		<company>Microsoft</company>
 		<year>1984</year>

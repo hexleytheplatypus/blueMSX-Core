@@ -35,6 +35,7 @@
 	<key>OESystemIdentifiers</key>
 	<array>
 		<string>openemu.system.msx</string>
+		<string>openemu.system.colecovision</string>
 	</array>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>

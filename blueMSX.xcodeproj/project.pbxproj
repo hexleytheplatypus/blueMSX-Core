@@ -322,6 +322,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8781C03B1BF4019800EA8EFB /* OEColecoVisionSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEColecoVisionSystemResponderClient.h; path = ../OpenEmu/ColecoVision/OEColecoVisionSystemResponderClient.h; sourceTree = "<group>"; };
 		FE1D7B721880671D00472D7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		FE6DE700187C6FF600EFA21E /* ArchBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchBitmap.h; sourceTree = "<group>"; };
 		FE6DE701187C6FF600EFA21E /* ArchCdrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchCdrom.h; sourceTree = "<group>"; };
@@ -1697,6 +1698,7 @@
 		FEB03AEF187BEE44000FDDCF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8781C03B1BF4019800EA8EFB /* OEColecoVisionSystemResponderClient.h */,
 				FEB03AF0187BEE8C000FDDCF /* OEMSXSystemResponderClient.h */,
 				FEB03AF1187BEF33000FDDCF /* blueMSXGameCore.h */,
 				FEB03AF2187BEF33000FDDCF /* blueMSXGameCore.m */,

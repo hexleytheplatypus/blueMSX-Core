@@ -10,7 +10,7 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 	© 2005-2009 openMSX team	(thanks for your help !)											 	
 	© 2004-2012 Benoit Delvaux (blueMSX co-developer)					
 -->
-<softwaredb xml:lang="en" timestamp="1352663820">
+<softwaredb xml:lang="en" timestamp="1355086800">
 <!-- MSX1 roms -->
 	<software>
 		<title xml:lang="en">10th Frame</title>
@@ -2591,12 +2591,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		<dump>
 			<original value="false" />
 			<rom>
-				<hash algo="sha1">8e2a2837c48bc8e2d2478043c728a4630982ba87</hash>
-			</rom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<rom>
 				<hash algo="sha1">532037fd92f7f1d34a47767416ce5c979a0694ad</hash>
 			</rom>
 		</dump>
@@ -3573,18 +3567,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<original value="true">GoodMSX</original>
 			<rom>
 				<hash algo="sha1">14fae375b81c86f71e872adca792c23aafac66a0</hash>
-			</rom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<rom>
-				<hash algo="sha1">9b4b4d93bae38876ce095c35993553f962d26fda</hash>
-			</rom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<rom>
-				<hash algo="sha1">a294f54da2be26f79020674616af95a25428bcd3</hash>
 			</rom>
 		</dump>
 		<dump>
@@ -5111,6 +5093,12 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<original value="false" />
 			<rom>
 				<hash algo="sha1">59a124ed38869892496fc12f14af404a422e162a</hash>
+			</rom>
+		</dump>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">fee6b1579f08ca6a7376cb6db44e7aaead237464</hash>
 			</rom>
 		</dump>
 	</software>
@@ -10734,6 +10722,13 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		</dump>
 		<dump>
 			<original value="false" />
+			<megarom>
+				<type>KonamiSCC</type>
+				<hash algo="sha1">9a6031c20b49afe6624789613eaa2c62c1bd70a8</hash>
+			</megarom>
+		</dump>
+		<dump>
+			<original value="false" />
 			<sccpluscart>
 				<boot>scc</boot>
 				<hash algo="sha1">6b42315eddefa0a33ea0c4510d6a4bc1086a5163</hash>
@@ -14911,6 +14906,19 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		</dump>
 	</software>
 	<software>
+		<title xml:lang="en">Knightmare</title>
+		<system>MSX</system>
+		<company>WYZ</company>
+		<year>2012</year>
+		<country>ES</country>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">d7dd6889541a00e99b9eedb35200f19a06701732</hash>
+			</rom>
+		</dump>
+	</software>
+	<software>
 		<title xml:lang="en">Knightmare II - The Maze of Galious</title>
 		<system>MSX</system>
 		<company>Konami</company>
@@ -15403,12 +15411,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<original value="false" />
 			<rom>
 				<hash algo="sha1">9bdfe44a7a0d5151346ff14ece3216b5108cc775</hash>
-			</rom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<rom>
-				<hash algo="sha1">da6a332dc236073286aa78582c0fccf728c86ba4</hash>
 			</rom>
 		</dump>
 		<dump>
@@ -16399,6 +16401,22 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<original value="false" />
 			<rom>
 				<hash algo="sha1">3103f0170bae627bdeb77108e0e782284e4581c9</hash>
+			</rom>
+		</dump>
+	</software>
+	<software>
+		<title xml:lang="en">Let It Bit</title>
+		<system>MSX</system>
+		<company>WYZ</company>
+		<year>2012</year>
+		<country>ES</country>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">c81eec71a3b0bef19589264b3d348c1db339be18</hash>
+				<remark>
+					<text>Needs SCC in slot 2</text>
+				</remark>
 			</rom>
 		</dump>
 	</software>
@@ -19070,12 +19088,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		<company>Matsushita Electric</company>
 		<year>1983</year>
 		<country>JP</country>
-		<dump>
-			<original value="false" />
-			<rom>
-				<hash algo="sha1">B00FDE7473740966C0713ED2E6043B2CD6D9262B</hash>
-			</rom>
-		</dump>
 		<dump>
 			<original value="false" />
 			<rom>
@@ -24425,6 +24437,25 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		</dump>
 	</software>
 	<software>
+		<title xml:lang="en">Salamander - Planet Ratis</title>
+		<system>MSX</system>
+		<company>WYZ</company>
+		<year>2012</year>
+		<country>ES</country>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">a3352fae44545fddf6db4c898ead0a2fbc45c4f8</hash>
+			</rom>
+		</dump>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">f89d094ad5cea9a0ad1cdb3205eb8c18a9a22043</hash>
+			</rom>
+		</dump>
+	</software>
+	<software>
 		<title xml:lang="en">Sand Game 1</title>
 		<system>MSX</system>
 		<company></company>
@@ -26866,6 +26897,19 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 				<type>ASCII8</type>
 				<hash algo="sha1">65da0e5c5de057a1ed836ec19b1f07e10f4b738f</hash>
 			</megarom>
+		</dump>
+	</software>
+	<software>
+		<title xml:lang="en">Stripes 1</title>
+		<system>MSX</system>
+		<company>WYZ</company>
+		<year>2012</year>
+		<country>ES</country>
+		<dump>
+			<original value="false" />
+			<rom>
+				<hash algo="sha1">e5dc26cf98df7308aa26c268dd7b89c19cf7d2e2</hash>
+			</rom>
 		</dump>
 	</software>
 	<software>
@@ -31813,13 +31857,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		<dump>
 			<original value="false" />
 			<megarom>
-				<type>ASCII8</type>
-				<hash algo="sha1">bf96a360083c5c26430940546827e91a69ade63e</hash>
-			</megarom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<megarom>
 				<type>GenericKonami</type>
 				<hash algo="sha1">2e388978f765bc5fe1fa9a42e1f059de5053721d</hash>
 			</megarom>
@@ -31976,12 +32013,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<original value="true">GoodMSX</original>
 			<rom>
 				<hash algo="sha1">930b4896c1590ebbb74d330447ec36e3feb5cab6</hash>
-			</rom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<rom>
-				<hash algo="sha1">96897697afe3a6354f2753f22a8b15d6d977b064</hash>
 			</rom>
 		</dump>
 	</software>
@@ -34973,6 +35004,20 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 		</dump>
 	</software>
 	<software>
+		<title xml:lang="en">Mu Pack</title>
+		<system>MSX</system>
+		<company>Bit2</company>
+		<year>1991</year>
+		<country>JP</country>
+		<dump>
+			<original value="false" />
+			<rom>
+				<type>MuPack</type>
+				<hash algo="sha1">e88ca790ab58e7709cd99cbbb23ff7d33631b71f</hash>
+			</rom>
+		</dump>
+	</software>
+	<software>
 		<title xml:lang="en">Nekketsu Judo</title>
 		<system>MSX</system>
 		<company>Pony Canyon</company>
@@ -35388,13 +35433,6 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<megarom>
 				<type>ASCII16SRAM2</type>
 				<hash algo="sha1">81143d2a8ef7cc593a604f3cc890312b42bdff01</hash>
-			</megarom>
-		</dump>
-		<dump>
-			<original value="false" />
-			<megarom>
-				<type>ASCII16SRAM2</type>
-				<hash algo="sha1">8AFE57C287ADC0F93F234E8E8C136AE3C00947C1</hash>
 			</megarom>
 		</dump>
 	</software>
@@ -36153,6 +36191,33 @@ This MSX games database is conceived for blueMSX, although it's 99% compatible w
 			<megarom>
 				<type>MSXDOS2</type>
 				<hash algo="sha1">4cd1c5cadfd96ec96d6ef9f8825b67a3f24e9602</hash>
+			</megarom>
+		</dump>
+		<dump>
+			<original value="false" />
+			<megarom>
+				<type>ASCII16</type>
+				<hash algo="sha1">9c029a7c304ab84fe87708bdc11ba7fd885100d9</hash>
+			</megarom>
+		</dump>
+		<dump>
+			<original value="false" />
+			<megarom>
+				<type>ASCII16</type>
+				<hash algo="sha1">cac8e2cbbfa583b12b3a0ddd5e7884d2df808287</hash>
+				<remark>
+					<text>English translation</text>
+				</remark>
+			</megarom>
+		</dump>
+		<dump>
+			<original value="false" />
+			<megarom>
+				<type>ASCII16</type>
+				<hash algo="sha1">b528755fee312b833fdc19e75090994a95b960d6</hash>
+				<remark>
+					<text>French translation</text>
+				</remark>
 			</megarom>
 		</dump>
 	</software>
