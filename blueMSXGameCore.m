@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2014, OpenEmu Team
+ Copyright (c) 2015, OpenEmu Team
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -54,11 +54,6 @@
 #include "CMCocoaBuffer.h"
 
 
-#define SCREEN_BUFFER_WIDTH 320
-#define SCREEN_WIDTH        272
-#define SCREEN_DEPTH         32
-#define SCREEN_HEIGHT       240
-
 #define SOUND_SAMPLE_RATE     44100
 #define SOUND_FRAME_SIZE      8192
 #define SOUND_BYTES_PER_FRAME 2
@@ -69,24 +64,24 @@
 
 @interface blueMSXGameCore () <OEMSXSystemResponderClient, OEColecoVisionSystemResponderClient>
 {
+    uint32_t *_videoBuffer;
+    int _videoWidth, _videoHeight;
     int virtualCodeMap[256];
-    int currentScreenIndex;
+    BOOL _isDoubleWidth;
     NSString *fileToLoad;
     RomType romTypeToLoad;
     Properties *properties;
     Video *video;
     Mixer *mixer;
-    CMCocoaBuffer *screens[2];
-    NSLock *bufferLock;
 }
 
 - (void)initializeEmulator;
-- (void)renderFrame;
 
 @end
 
 static blueMSXGameCore *_core;
 static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
+static int framebufferScanline = 0;
 
 @implementation blueMSXGameCore
 
@@ -94,14 +89,12 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 {
     if ((self = [super init]))
     {
-        currentScreenIndex = 0;
-        bufferLock = [[NSLock alloc] init];
+        _videoBuffer = (uint32_t *)malloc((272 * 2) * 240 * sizeof(uint32_t));
+        _videoWidth =  272;
+        _videoHeight =  240;
+        _isDoubleWidth = NO;
+
         _core = self;
-        for (int i = 0; i < 2; i++)
-            screens[i] = [[CMCocoaBuffer alloc] initWithWidth:SCREEN_BUFFER_WIDTH
-                                                       height:SCREEN_HEIGHT
-                                                        depth:SCREEN_DEPTH
-                                                         zoom:1];
     }
 
     return self;
@@ -109,7 +102,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 
 - (void)dealloc
 {
-    videoDestroy(video);
+    free(_videoBuffer);
     propDestroy(properties);
     mixerSetWriteCallback(mixer, NULL, NULL, 0);
     mixerDestroy(mixer);
@@ -118,7 +111,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 - (void)initializeEmulator
 {
     NSString *resourcePath = [[[self owner] bundle] resourcePath];
-    
+
     __block NSString *machinesPath = [resourcePath stringByAppendingPathComponent:@"Machines"];
     __block NSString *machineName;
 
@@ -137,14 +130,14 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                                     includingPropertiesForKeys:nil
                                                        options:NSDirectoryEnumerationSkipsHiddenFiles
                                                          error:NULL];
-        
+
         [customMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
         {
             NSString *customMachine = [[obj lastPathComponent] stringByDeletingPathExtension];
-            
+
             machinesPath = [customMachinesPath path];
             machineName = customMachine;
-            
+
             NSLog(@"blueMSX: Will use custom machine \"%@\"", customMachine);
 
             *stop = YES;
@@ -157,20 +150,20 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                        attributes:nil
                             error:NULL];
     }
-    
+
     properties = propCreate(0, 0, P_KBD_EUROPEAN, 0, "");
-    
+
     // Set machine name
     machineSetDirectory([machinesPath UTF8String]);
     strncpy(properties->emulation.machineName,
             [machineName UTF8String], PROP_MAXPATH - 1);
-    
+
     // Set up properties
     properties->emulation.speed = 50;
     properties->emulation.syncMethod = P_EMU_SYNCTOVBLANKASYNC;
     properties->emulation.enableFdcTiming = YES;
     properties->emulation.vdpSyncMode = P_VDP_SYNCAUTO;
-    
+
     properties->video.brightness = 100;
     properties->video.contrast = 100;
     properties->video.saturation = 100;
@@ -182,7 +175,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     properties->video.monitorColor = P_VIDEO_COLOR;
     properties->video.scanlinesPct = 100;
     properties->video.scanlinesEnable = (properties->video.scanlinesPct < 100);
-    
+
     properties->sound.mixerChannel[MIXER_CHANNEL_PSG].volume = 100;
     properties->sound.mixerChannel[MIXER_CHANNEL_PSG].pan = 50;
     properties->sound.mixerChannel[MIXER_CHANNEL_PSG].enable = YES;
@@ -213,24 +206,14 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
         properties->joy2.typeId = JOYSTICK_PORT_JOYSTICK;
     }
 
-    // Init video
-    video = videoCreate();
-    videoSetColors(video, properties->video.saturation, properties->video.brightness,
-                   properties->video.contrast, properties->video.gamma);
-    videoSetScanLines(video, properties->video.scanlinesEnable, properties->video.scanlinesPct);
-    videoSetColorSaturation(video, properties->video.colorSaturationEnable, properties->video.colorSaturationWidth);
-    videoSetColorMode(video, properties->video.monitorColor);
-    videoSetRgbMode(video, 1);
-    videoUpdateAll(video, properties);
-    
     // Init translations (unused for the most part)
     langSetLanguage(properties->language);
     langInit();
-    
+
     // Init input
     joystickPortSetType(0, properties->joy1.typeId);
     joystickPortSetType(1, properties->joy2.typeId);
-    
+
     // Init misc. devices
     printerIoSetType(properties->ports.Lpt.type, properties->ports.Lpt.fileName);
     printerIoSetType(properties->ports.Lpt.type, properties->ports.Lpt.fileName);
@@ -238,28 +221,26 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     midiIoSetMidiOutType(properties->sound.MidiOut.type, properties->sound.MidiOut.fileName);
     midiIoSetMidiInType(properties->sound.MidiIn.type, properties->sound.MidiIn.fileName);
     ykIoSetMidiInType(properties->sound.YkIn.type, properties->sound.YkIn.fileName);
-    
+
     // Init mixer
     mixer = mixerCreate();
-    
+
     for (int i = 0; i < MIXER_CHANNEL_TYPE_COUNT; i++)
     {
         mixerSetChannelTypeVolume(mixer, i, properties->sound.mixerChannel[i].volume);
         mixerSetChannelTypePan(mixer, i, properties->sound.mixerChannel[i].pan);
         mixerEnableChannelType(mixer, i, properties->sound.mixerChannel[i].enable);
     }
-    
+
     mixerSetMasterVolume(mixer, properties->sound.masterVolume);
     mixerEnableMaster(mixer, properties->sound.masterEnable);
     mixerSetStereo(mixer, YES);
-    mixerSetWriteCallback(mixer, mixAudio,
-                          (__bridge void *)[self ringBufferAtIndex:0],
-                          SOUND_FRAME_SIZE);
-    
+    mixerSetWriteCallback(mixer, mixAudio, (__bridge void *)[self ringBufferAtIndex:0], SOUND_FRAME_SIZE);
+
     // Init media DB
     mediaDbLoad([[resourcePath stringByAppendingPathComponent:@"Databases"] UTF8String]);
     mediaDbSetDefaultRomType(properties->cartridge.defaultType);
-    
+
     // Init board
     boardSetFdcTimingEnable(properties->emulation.enableFdcTiming);
     boardSetY8950Enable(properties->sound.chip.enableY8950);
@@ -267,7 +248,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     boardSetMoonsoundEnable(properties->sound.chip.enableMoonsound);
     boardSetVideoAutodetect(properties->video.detectActiveMonitor);
     boardEnableSnapshots(0);
-    
+
     // Init storage
     for (int i = 0; i < PROP_MAX_CARTS; i++)
     {
@@ -276,23 +257,23 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                             properties->media.carts[i].fileNameInZip,
                             properties->media.carts[i].type, -1);
     }
-    
+
     for (int i = 0; i < PROP_MAX_DISKS; i++)
     {
         if (properties->media.disks[i].fileName[0])
             insertDiskette(properties, i, properties->media.disks[i].fileName,
                            properties->media.disks[i].fileNameInZip, -1);
     }
-    
+
     for (int i = 0; i < PROP_MAX_TAPES; i++)
     {
         if (properties->media.tapes[i].fileName[0])
             insertCassette(properties, i, properties->media.tapes[i].fileName,
                            properties->media.tapes[i].fileNameInZip, 0);
     }
-    
+
     tapeSetReadOnly(properties->cassette.readOnly);
-    
+
     // Misc. initialization
     emulatorInit(properties, mixer);
     actionInit(video, properties, mixer);
@@ -309,7 +290,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                               withIntermediateDirectories:YES
                                                attributes:nil
                                                     error:NULL];
-    
+
     boardSetDirectory([[self batterySavesDirectoryPath] UTF8String]);
 
     tryLaunchUnknownFile(properties, [fileToLoad UTF8String], NO);
@@ -321,7 +302,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 {
     emulatorSuspend();
     emulatorStop();
-    
+
     [super stopEmulation];
 }
 
@@ -331,7 +312,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
         emulatorSetState(EMU_PAUSED);
     else
         emulatorSetState(EMU_RUNNING);
-    
+
     [super setPauseEmulation:pauseEmulation];
 }
 
@@ -343,7 +324,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 - (void)fastForward:(BOOL)flag
 {
     [super fastForward:flag];
-    
+
     properties->emulation.speed = flag ? 100 : 50;
     emulatorSetFrequency(properties->emulation.speed, NULL);
 }
@@ -488,7 +469,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                              controller:(NSInteger)index
 {
     int code = -1;
-    
+
     switch (button)
     {
     case OEMSXJoystickUp:
@@ -512,7 +493,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     default:
         break;
     }
-    
+
     if (code != -1)
         virtualCodeSet(code);
 }
@@ -521,7 +502,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
                                 controller:(NSInteger)index
 {
     int code = -1;
-    
+
     switch (button)
     {
     case OEMSXJoystickUp:
@@ -545,7 +526,7 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     default:
         break;
     }
-    
+
     if (code != -1)
         virtualCodeUnset(code);
 }
@@ -566,42 +547,9 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
     memcpy(eventMap, _core->virtualCodeMap, sizeof(_core->virtualCodeMap));
 }
 
-- (void)renderFrame
+- (NSTimeInterval)frameInterval
 {
-    [bufferLock lock];
-    
-    FrameBuffer* frameBuffer = frameBufferFlipViewFrame(properties->emulation.syncMethod == P_EMU_SYNCTOVBLANKASYNC);
-    CMCocoaBuffer *currentScreen = screens[currentScreenIndex];
-    
-    char* dpyData = currentScreen->pixels;
-    int width = currentScreen->actualWidth;
-    int height = currentScreen->actualHeight;
-    
-    if (frameBuffer == NULL)
-        frameBuffer = frameBufferGetWhiteNoiseFrame();
-    
-    int borderWidth = (SCREEN_BUFFER_WIDTH - frameBuffer->maxWidth) * currentScreen->zoom / 2;
-    
-    videoRender(video, frameBuffer, currentScreen->depth, currentScreen->zoom,
-                dpyData + borderWidth * currentScreen->bytesPerPixel, 0,
-                currentScreen->pitch, -1);
-    
-    if (borderWidth > 0)
-    {
-        int h = height;
-        while (h--)
-        {
-            memset(dpyData, 0, borderWidth * currentScreen->bytesPerPixel);
-            memset(dpyData + (width - borderWidth) * currentScreen->bytesPerPixel,
-                   0, borderWidth * currentScreen->bytesPerPixel);
-            
-            dpyData += currentScreen->pitch;
-        }
-    }
-    
-    currentScreenIndex ^= 1;
-    
-    [bufferLock unlock];
+    return boardGetRefreshRate() ? boardGetRefreshRate() : 60;
 }
 
 #pragma mark - OE I/O
@@ -609,20 +557,20 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 - (BOOL)loadFileAtPath:(NSString *)path error:(NSError **)error
 {
     [self initializeEmulator];
-    
+
     fileToLoad = nil;
     romTypeToLoad = ROM_UNKNOWN;
-    
+
     const char *cpath = [path UTF8String];
     MediaType *mediaType = mediaDbLookupRomByPath(cpath);
     if (!mediaType)
         mediaType = mediaDbGuessRomByPath(cpath);
-    
+
     if (mediaType)
         romTypeToLoad = mediaDbGetRomType(mediaType);
-    
+
     fileToLoad = path;
-    
+
     return YES;
 }
 
@@ -650,38 +598,37 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 
 - (OEIntSize)bufferSize
 {
-    return OEIntSizeMake(screens[0]->actualWidth, screens[0]->actualHeight);
+    return OEIntSizeMake(_videoWidth, _videoHeight);
 }
 
 - (OEIntRect)screenRect
 {
-    return OEIntRectMake((SCREEN_BUFFER_WIDTH - SCREEN_WIDTH) / 2, 0,
-                         SCREEN_WIDTH, screens[0]->actualHeight);
+    return OEIntRectMake(0, 0, _videoWidth, _videoHeight);
 }
 
 - (OEIntSize)aspectSize
 {
-    return OEIntSizeMake(17, 15);
+    return OEIntSizeMake(256 * (8.0/7.0), 240);
 }
 
 - (const void *)videoBuffer
 {
-    return screens[currentScreenIndex]->pixels;
+    return _videoBuffer;
 }
 
 - (GLenum)pixelFormat
 {
-    return GL_RGBA;
+    return GL_BGRA;
 }
 
 - (GLenum)pixelType
 {
-    return GL_UNSIGNED_BYTE;
+    return GL_UNSIGNED_INT_8_8_8_8_REV;
 }
 
 - (GLenum)internalPixelFormat
 {
-    return GL_RGB;
+    return GL_RGB8;
 }
 
 #pragma mark - OE Audio
@@ -700,9 +647,8 @@ static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count);
 
 static Int32 mixAudio(void *param, Int16 *buffer, UInt32 count)
 {
-    OERingBuffer *soundBuffer = (__bridge OERingBuffer *)param;
-    [soundBuffer write:(uint8_t *)buffer maxLength:count * SOUND_BYTES_PER_FRAME];
-    
+    [[_core ringBufferAtIndex:0] write:buffer maxLength:count * SOUND_BYTES_PER_FRAME];
+
     return 0;
 }
 
@@ -801,8 +747,6 @@ void archSoundSuspend()
 
 int archUpdateEmuDisplay(int syncMode)
 {
-    [_core renderFrame];
-    
     return 1;
 }
 
@@ -814,5 +758,73 @@ void *archScreenCapture(ScreenCaptureType type, int *bitmapSize, int onlyBmp)
 {
     return NULL;
 }
+
+// Framebuffer
+
+Pixel *frameBufferGetLine(FrameBuffer *frameBuffer, int y)
+{
+    return (_core->_videoBuffer + y * _core->_videoWidth);
+}
+
+FrameBufferData *frameBufferDataCreate(int maxWidth, int maxHeight, int defaultHorizZoom)
+{
+    return (void *)_core->_videoBuffer;
+}
+
+FrameBufferData *frameBufferGetActive()
+{
+    return (void *)_core->_videoBuffer;
+}
+
+FrameBuffer *frameBufferGetDrawFrame()
+{
+    return (void *)_core->_videoBuffer;
+}
+
+FrameBuffer *frameBufferFlipDrawFrame()
+{
+    return (void *)_core->_videoBuffer;
+}
+
+void frameBufferSetLineCount(FrameBuffer *frameBuffer, int val)
+{
+    _core->_videoHeight = val;
+}
+
+int frameBufferGetLineCount(FrameBuffer *frameBuffer) {
+    return _core->_videoHeight;
+}
+
+int frameBufferGetDoubleWidth(FrameBuffer *frameBuffer, int y)
+{
+    return _core->_isDoubleWidth;
+}
+
+void frameBufferSetDoubleWidth(FrameBuffer *frameBuffer, int y, int val)
+{
+    _core->_videoWidth = _core->_isDoubleWidth ? _core->_videoWidth * 2 : _core->_videoWidth;
+}
+
+// MSX Ascii Laser and Gunstick
+void frameBufferSetScanline(int scanline)
+{
+    framebufferScanline = scanline;
+}
+
+int frameBufferGetScanline()
+{
+    return framebufferScanline;
+}
+
+int frameBufferGetMaxWidth(FrameBuffer *frameBuffer)
+{
+    return _core->_videoWidth;
+}
+
+void frameBufferDataDestroy(FrameBufferData *frameData) {}
+void frameBufferSetActive(FrameBufferData *frameData) {}
+void frameBufferSetMixMode(FrameBufferMixMode mode, FrameBufferMixMode mask) {}
+void frameBufferClearDeinterlace() {}
+void frameBufferSetInterlace(FrameBuffer *frameBuffer, int val) {}
 
 @end

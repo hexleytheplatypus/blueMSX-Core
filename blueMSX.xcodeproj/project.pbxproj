@@ -32,7 +32,6 @@
 		FE6DE957187C6FF800EFA21E /* SG1000.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE721187C6FF600EFA21E /* SG1000.c */; };
 		FE6DE958187C6FF800EFA21E /* SVI.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE723187C6FF600EFA21E /* SVI.c */; };
 		FE6DE959187C6FF800EFA21E /* build_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = FE6DE726187C6FF700EFA21E /* build_info.txt */; };
-		FE6DE95A187C6FF800EFA21E /* CMCocoaBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE72B187C6FF700EFA21E /* CMCocoaBuffer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FE6DE95E187C6FF800EFA21E /* CMCocoaTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE733187C6FF700EFA21E /* CMCocoaTimer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FE6DE95F187C6FF800EFA21E /* CMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE735187C6FF700EFA21E /* CMEvent.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FE6DE960187C6FF800EFA21E /* CMSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE737187C6FF700EFA21E /* CMSemaphore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -282,14 +281,9 @@
 		FE6DEA55187C6FF900EFA21E /* ZipFromMem.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE92C187C6FF800EFA21E /* ZipFromMem.c */; };
 		FE6DEA56187C6FF900EFA21E /* ziphelper.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE92E187C6FF800EFA21E /* ziphelper.c */; };
 		FE6DEA57187C6FF900EFA21E /* CRTC6845.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE932187C6FF800EFA21E /* CRTC6845.c */; };
-		FE6DEA58187C6FF900EFA21E /* FrameBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE934187C6FF800EFA21E /* FrameBuffer.c */; };
 		FE6DEA59187C6FF900EFA21E /* V9938.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE937187C6FF800EFA21E /* V9938.c */; };
 		FE6DEA5A187C6FF900EFA21E /* VDP.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE939187C6FF800EFA21E /* VDP.c */; };
 		FE6DEA5B187C6FF900EFA21E /* VideoManager.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE93B187C6FF800EFA21E /* VideoManager.c */; };
-		FE6DEA5C187C6FF900EFA21E /* hq2x.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE93E187C6FF800EFA21E /* hq2x.c */; };
-		FE6DEA5D187C6FF900EFA21E /* hq3x.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE940187C6FF800EFA21E /* hq3x.c */; };
-		FE6DEA5E187C6FF900EFA21E /* Scalebit.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE944187C6FF800EFA21E /* Scalebit.c */; };
-		FE6DEA5F187C6FF900EFA21E /* VideoRender.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE946187C6FF800EFA21E /* VideoRender.c */; };
 		FE6DEA60187C6FF900EFA21E /* R800.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE949187C6FF800EFA21E /* R800.c */; };
 		FE6DEA61187C6FF900EFA21E /* R800Dasm.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE94B187C6FF800EFA21E /* R800Dasm.c */; };
 		FE6DEA62187C6FF900EFA21E /* R800Debug.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE94D187C6FF800EFA21E /* R800Debug.c */; };
@@ -1914,9 +1908,7 @@
 				FE6DE9E9187C6FF800EFA21E /* romMapperMatraINK.c in Sources */,
 				FE6DEA0E187C6FF900EFA21E /* romMapperSg1000Castle.c in Sources */,
 				FE6DE95E187C6FF800EFA21E /* CMCocoaTimer.m in Sources */,
-				FE6DEA5C187C6FF900EFA21E /* hq2x.c in Sources */,
 				FE6DEA15187C6FF900EFA21E /* romMapperSvi328Rs232.c in Sources */,
-				FE6DEA5E187C6FF900EFA21E /* Scalebit.c in Sources */,
 				FE6DEA13187C6FF900EFA21E /* romMapperSvi328Fdc.c in Sources */,
 				FE6DEA4C187C6FF900EFA21E /* zutil.c in Sources */,
 				FE6DE979187C6FF800EFA21E /* CoinDevice.c in Sources */,
@@ -1968,7 +1960,6 @@
 				FE6DE9F2187C6FF800EFA21E /* romMapperMsxPrn.c in Sources */,
 				FE6DEA10187C6FF900EFA21E /* romMapperSonyHBIV1.c in Sources */,
 				FE6DE9CE187C6FF800EFA21E /* romMapperF4device.c in Sources */,
-				FE6DEA58187C6FF900EFA21E /* FrameBuffer.c in Sources */,
 				FE6DEA4A187C6FF900EFA21E /* unzip.c in Sources */,
 				FE6DE9FC187C6FF800EFA21E /* romMapperObsonet.c in Sources */,
 				FE6DEA04187C6FF800EFA21E /* romMapperPhilipsFdc.c in Sources */,
@@ -2011,7 +2002,6 @@
 				FEE6DDB8199551600015EC0F /* romMapperDooly.c in Sources */,
 				FE6DEA35187C6FF900EFA21E /* VLM5030.c in Sources */,
 				FE6DE977187C6FF800EFA21E /* LaunchFile.c in Sources */,
-				FE6DEA5F187C6FF900EFA21E /* VideoRender.c in Sources */,
 				FE6DE9D1187C6FF800EFA21E /* romMapperFMPAK.c in Sources */,
 				FEB03AF3187BEF33000FDDCF /* blueMSXGameCore.m in Sources */,
 				FE6DEA48187C6FF900EFA21E /* trees.c in Sources */,
@@ -2031,7 +2021,6 @@
 				FE6DE954187C6FF800EFA21E /* Coleco.c in Sources */,
 				FE6DE98B187C6FF800EFA21E /* DirAsDisk.c in Sources */,
 				FE6DE995187C6FF800EFA21E /* JoystickIO.c in Sources */,
-				FE6DEA5D187C6FF900EFA21E /* hq3x.c in Sources */,
 				FE6DE981187C6FF800EFA21E /* MsxAsciiLaser.c in Sources */,
 				FEE6DDB6199551600015EC0F /* romMapperSvi707Fdc.c in Sources */,
 				FE6DEA53187C6FF900EFA21E /* TokenExtract.c in Sources */,
@@ -2090,7 +2079,6 @@
 				FE6DEA0A187C6FF900EFA21E /* romMapperSegaBasic.c in Sources */,
 				FE6DEA26187C6FF900EFA21E /* KeyClick.c in Sources */,
 				FE6DE998187C6FF800EFA21E /* Microwire93Cx6.c in Sources */,
-				FE6DE95A187C6FF800EFA21E /* CMCocoaBuffer.m in Sources */,
 				FE6DEA40187C6FF900EFA21E /* crc32.c in Sources */,
 				FE6DEA32187C6FF900EFA21E /* SamplePlayer.c in Sources */,
 				FE6DE9CC187C6FF800EFA21E /* romMapperDRAM.c in Sources */,
@@ -2181,14 +2169,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"-DOSX",
-					"-DENABLE_OPENGL",
-					"-DNO_EMBEDDED_SAMPLES",
-					"-DNO_FILE_HISTORY",
-					"-DNO_ASM",
-					"-DDEBUG",
-				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2225,14 +2205,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = (
-					"-DENABLE_OPENGL",
-					"-DNO_EMBEDDED_SAMPLES",
-					"-DNO_FILE_HISTORY",
-					"-DNO_ASM",
-					"-DFINAL",
-					"-DOSX",
-				);
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2247,12 +2219,12 @@
 				INFOPLIST_FILE = "blueMSX-Info.plist";
 				INSTALL_PATH = "\"$(USER_LIBRARY_DIR)/Application Support/OpenEmu/Cores\"";
 				OTHER_CFLAGS = (
-					"-DLSB_FIRST",
-					"-DENABLE_OPENGL",
 					"-DNO_EMBEDDED_SAMPLES",
 					"-DNO_FILE_HISTORY",
 					"-DNO_ASM",
-					"-DOSX",
+					"-DNO_FRAMEBUFFER",
+					"-DPIXEL_WIDTH=32",
+					"-DVIDEO_COLOR_TYPE_RGB888",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2271,12 +2243,12 @@
 				INFOPLIST_FILE = "blueMSX-Info.plist";
 				INSTALL_PATH = "\"$(USER_LIBRARY_DIR)/Application Support/OpenEmu/Cores\"";
 				OTHER_CFLAGS = (
-					"-DLSB_FIRST",
-					"-DENABLE_OPENGL",
 					"-DNO_EMBEDDED_SAMPLES",
 					"-DNO_FILE_HISTORY",
 					"-DNO_ASM",
-					"-DOSX",
+					"-DNO_FRAMEBUFFER",
+					"-DPIXEL_WIDTH=32",
+					"-DVIDEO_COLOR_TYPE_RGB888",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
