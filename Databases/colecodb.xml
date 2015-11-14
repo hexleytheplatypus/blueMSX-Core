@@ -3104,6 +3104,20 @@
 			</rom>
 		</dump>
 	</software>
+    <software>
+		<title xml:lang="en">Mario Bros.</title>
+		<system>Coleco</system>
+		<company>CollectorVision</company>
+		<year>2009</year>
+		<country>US</country>
+		<dump>
+			<original value="false" />
+			<megarom>
+				<type>MegaCart</type>
+				<hash algo="sha1">cf36ea335ad730049a099a90d4e1876f417dc120</hash>
+			</megarom>
+		</dump>
+	</software>
 	<software>
 		<title xml:lang="en">M.A.S.H.</title>
 		<system>Coleco</system>
@@ -4053,6 +4067,20 @@
 			</rom>
 		</dump>
 	</software>
+    <software>
+        <title xml:lang="en">Princess Quest</title>
+        <system>Coleco</system>
+        <company>OTG</company>
+        <year>2012</year>
+        <country>MX</country>
+        <dump>
+            <original value="false" />
+            <megarom>
+                <type>MegaCart</type>
+                <hash algo="sha1">a50bff8c50a873bfa7befaf9a801a790ad2289cc</hash>
+            </megarom>
+        </dump>
+    </software>
 	<software>
 		<title xml:lang="en">Puckman Sounds</title>
 		<system>Coleco</system>
@@ -6455,6 +6483,20 @@
 			</rom>
 		</dump>
 	</software>
+    <software>
+        <title xml:lang="en">Zombie Near</title>
+        <system>Coleco</system>
+        <company>OTG</company>
+        <year>2013</year>
+        <country>MX</country>
+        <dump>
+            <original value="false" />
+            <megarom>
+                <type>MegaCart</type>
+                <hash algo="sha1">703cfa1f94298a1a95537363f730404745e9385a</hash>
+            </megarom>
+        </dump>
+    </software>
 <!-- ColecoAdam roms -->
 	<software>
 		<title xml:lang="en">Adam Demo</title>
