@@ -58,6 +58,9 @@
 #define SOUND_FRAME_SIZE      8192
 #define SOUND_BYTES_PER_FRAME 2
 
+#define FB_MAX_WIDTH (272 * 2)
+#define FB_MAX_HEIGHT 240
+
 #define virtualCodeSet(eventCode) self->virtualCodeMap[eventCode] = 1
 #define virtualCodeUnset(eventCode) self->virtualCodeMap[eventCode] = 0
 #define virtualCodeClear() memset(self->virtualCodeMap, 0, sizeof(self->virtualCodeMap));
@@ -89,7 +92,7 @@ static int framebufferScanline = 0;
 {
     if ((self = [super init]))
     {
-        _videoBuffer = (uint32_t *)malloc((272 * 2) * 240 * sizeof(uint32_t));
+        _videoBuffer = (uint32_t *)malloc(FB_MAX_WIDTH * FB_MAX_HEIGHT * sizeof(uint32_t));
         _videoWidth =  272;
         _videoHeight =  240;
         _isDoubleWidth = NO;
@@ -598,7 +601,7 @@ static int framebufferScanline = 0;
 
 - (OEIntSize)bufferSize
 {
-    return OEIntSizeMake(_videoWidth, _videoHeight);
+    return OEIntSizeMake(FB_MAX_WIDTH, FB_MAX_HEIGHT);
 }
 
 - (OEIntRect)screenRect
@@ -763,7 +766,7 @@ void *archScreenCapture(ScreenCaptureType type, int *bitmapSize, int onlyBmp)
 
 Pixel *frameBufferGetLine(FrameBuffer *frameBuffer, int y)
 {
-    return (_core->_videoBuffer + y * _core->_videoWidth);
+    return (_core->_videoBuffer + y * FB_MAX_WIDTH);
 }
 
 FrameBufferData *frameBufferDataCreate(int maxWidth, int maxHeight, int defaultHorizZoom)
@@ -802,7 +805,11 @@ int frameBufferGetDoubleWidth(FrameBuffer *frameBuffer, int y)
 
 void frameBufferSetDoubleWidth(FrameBuffer *frameBuffer, int y, int val)
 {
-    _core->_videoWidth = _core->_isDoubleWidth ? _core->_videoWidth * 2 : _core->_videoWidth;
+    if(_core->_isDoubleWidth != val)
+    {
+        _core->_isDoubleWidth = val;
+        _core->_videoWidth = _core->_isDoubleWidth ? FB_MAX_WIDTH : 272;
+    }
 }
 
 // MSX Ascii Laser and Gunstick
