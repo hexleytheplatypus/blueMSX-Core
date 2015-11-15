@@ -151,7 +151,7 @@ static int framebufferScanline = 0;
                             error:NULL];
     }
 
-    properties = propCreate(0, 0, P_KBD_EUROPEAN, 0, "");
+    properties = propCreate(0, EMU_LANG_ENGLISH, P_KBD_EUROPEAN, P_EMU_SYNCNONE, "");
 
     // Set machine name
     machineSetDirectory([machinesPath UTF8String]);
