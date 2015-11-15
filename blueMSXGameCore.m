@@ -124,7 +124,7 @@ static int framebufferScanline = 0;
     NSURL *supportPath = [NSURL fileURLWithPath:[self supportDirectoryPath]];
     NSURL *customMachinesPath = [supportPath URLByAppendingPathComponent:@"Machines"];
 
-    if ([customMachinesPath checkResourceIsReachableAndReturnError:NULL] == YES)
+    if ([customMachinesPath checkResourceIsReachableAndReturnError:NULL] == YES && ![[self systemIdentifier] isEqualToString:@"openemu.system.colecovision"])
     {
         NSArray *customMachines = [fm contentsOfDirectoryAtURL:customMachinesPath
                                     includingPropertiesForKeys:nil
@@ -293,7 +293,7 @@ static int framebufferScanline = 0;
 
     boardSetDirectory([[self batterySavesDirectoryPath] UTF8String]);
 
-    tryLaunchUnknownFile(properties, [fileToLoad UTF8String], NO);
+    tryLaunchUnknownFile(properties, [fileToLoad UTF8String], YES);
 
     [super startEmulation];
 }
