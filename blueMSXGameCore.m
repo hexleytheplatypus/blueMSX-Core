@@ -121,7 +121,7 @@ static int framebufferScanline = 0;
     if([[self systemIdentifier] isEqualToString:@"openemu.system.colecovision"])
         machineName = @"COL - ColecoVision";
     else
-        machineName = @"MSX2 - C-BIOS";
+        machineName = @"MSX2+ - C-BIOS - JP";
 
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *supportPath = [NSURL fileURLWithPath:[self supportDirectoryPath]];
