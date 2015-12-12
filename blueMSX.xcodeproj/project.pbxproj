@@ -33,9 +33,9 @@
 		FE6DE958187C6FF800EFA21E /* SVI.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE723187C6FF600EFA21E /* SVI.c */; };
 		FE6DE959187C6FF800EFA21E /* build_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = FE6DE726187C6FF700EFA21E /* build_info.txt */; };
 		FE6DE95E187C6FF800EFA21E /* CMCocoaTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE733187C6FF700EFA21E /* CMCocoaTimer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FE6DE95F187C6FF800EFA21E /* CMEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE735187C6FF700EFA21E /* CMEvent.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FE6DE960187C6FF800EFA21E /* CMSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE737187C6FF700EFA21E /* CMSemaphore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FE6DE961187C6FF800EFA21E /* CMThread.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE739187C6FF700EFA21E /* CMThread.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FE6DE95F187C6FF800EFA21E /* CocoaEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE735187C6FF700EFA21E /* CocoaEvent.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FE6DE960187C6FF800EFA21E /* CocoaSema.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE737187C6FF700EFA21E /* CocoaSema.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FE6DE961187C6FF800EFA21E /* CocoaThread.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE739187C6FF700EFA21E /* CocoaThread.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FE6DE962187C6FF800EFA21E /* CocoaCdrom.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE73A187C6FF700EFA21E /* CocoaCdrom.c */; };
 		FE6DE963187C6FF800EFA21E /* CocoaDialog.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE73B187C6FF700EFA21E /* CocoaDialog.c */; };
 		FE6DE964187C6FF800EFA21E /* CocoaEth.c in Sources */ = {isa = PBXBuildFile; fileRef = FE6DE73C187C6FF700EFA21E /* CocoaEth.c */; };
@@ -360,12 +360,9 @@
 		FE6DE72B187C6FF700EFA21E /* CMCocoaBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCocoaBuffer.m; sourceTree = "<group>"; };
 		FE6DE732187C6FF700EFA21E /* CMCocoaTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCocoaTimer.h; sourceTree = "<group>"; };
 		FE6DE733187C6FF700EFA21E /* CMCocoaTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCocoaTimer.m; sourceTree = "<group>"; };
-		FE6DE734187C6FF700EFA21E /* CMEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMEvent.h; sourceTree = "<group>"; };
-		FE6DE735187C6FF700EFA21E /* CMEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMEvent.m; sourceTree = "<group>"; };
-		FE6DE736187C6FF700EFA21E /* CMSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMSemaphore.h; sourceTree = "<group>"; };
-		FE6DE737187C6FF700EFA21E /* CMSemaphore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMSemaphore.m; sourceTree = "<group>"; };
-		FE6DE738187C6FF700EFA21E /* CMThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMThread.h; sourceTree = "<group>"; };
-		FE6DE739187C6FF700EFA21E /* CMThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMThread.m; sourceTree = "<group>"; };
+		FE6DE735187C6FF700EFA21E /* CocoaEvent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CocoaEvent.c; sourceTree = "<group>"; };
+		FE6DE737187C6FF700EFA21E /* CocoaSema.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CocoaSema.c; sourceTree = "<group>"; };
+		FE6DE739187C6FF700EFA21E /* CocoaThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaThread.m; sourceTree = "<group>"; };
 		FE6DE73A187C6FF700EFA21E /* CocoaCdrom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CocoaCdrom.c; sourceTree = "<group>"; };
 		FE6DE73B187C6FF700EFA21E /* CocoaDialog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CocoaDialog.c; sourceTree = "<group>"; };
 		FE6DE73C187C6FF700EFA21E /* CocoaEth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CocoaEth.c; sourceTree = "<group>"; };
@@ -1038,12 +1035,9 @@
 				FE6DE72B187C6FF700EFA21E /* CMCocoaBuffer.m */,
 				FE6DE732187C6FF700EFA21E /* CMCocoaTimer.h */,
 				FE6DE733187C6FF700EFA21E /* CMCocoaTimer.m */,
-				FE6DE734187C6FF700EFA21E /* CMEvent.h */,
-				FE6DE735187C6FF700EFA21E /* CMEvent.m */,
-				FE6DE736187C6FF700EFA21E /* CMSemaphore.h */,
-				FE6DE737187C6FF700EFA21E /* CMSemaphore.m */,
-				FE6DE738187C6FF700EFA21E /* CMThread.h */,
-				FE6DE739187C6FF700EFA21E /* CMThread.m */,
+				FE6DE735187C6FF700EFA21E /* CocoaEvent.c */,
+				FE6DE737187C6FF700EFA21E /* CocoaSema.c */,
+				FE6DE739187C6FF700EFA21E /* CocoaThread.m */,
 				FE6DE73A187C6FF700EFA21E /* CocoaCdrom.c */,
 				FE6DE73B187C6FF700EFA21E /* CocoaDialog.c */,
 				FE6DE73C187C6FF700EFA21E /* CocoaEth.c */,
@@ -1871,7 +1865,7 @@
 				FE6DEA37187C6FF900EFA21E /* ym2151.c in Sources */,
 				FE6DE99D187C6FF800EFA21E /* PrinterIO.c in Sources */,
 				FE6DE99F187C6FF800EFA21E /* rtl8019.c in Sources */,
-				FE6DE961187C6FF800EFA21E /* CMThread.m in Sources */,
+				FE6DE961187C6FF800EFA21E /* CocoaThread.m in Sources */,
 				FE6DE994187C6FF800EFA21E /* I8255.c in Sources */,
 				FE6DE9EB187C6FF800EFA21E /* romMapperMegaRAM.c in Sources */,
 				FE6DE99B187C6FF800EFA21E /* MsxPPI.c in Sources */,
@@ -2072,7 +2066,7 @@
 				FE6DE9C1187C6FF800EFA21E /* romMapperASCII16nf.c in Sources */,
 				FE6DEA24187C6FF900EFA21E /* DAC.c in Sources */,
 				FE6DEA59187C6FF900EFA21E /* V9938.c in Sources */,
-				FE6DE960187C6FF800EFA21E /* CMSemaphore.m in Sources */,
+				FE6DE960187C6FF800EFA21E /* CocoaSema.c in Sources */,
 				FE6DE973187C6FF800EFA21E /* AppConfig.c in Sources */,
 				FE6DEA29187C6FF900EFA21E /* Moonsound.cpp in Sources */,
 				FE6DE9EC187C6FF800EFA21E /* romMapperMicrosol.c in Sources */,
@@ -2101,7 +2095,7 @@
 				FE6DE9F8187C6FF800EFA21E /* romMapperNms1210Rs232.c in Sources */,
 				FE6DE96C187C6FF800EFA21E /* CocoaVideoIn.c in Sources */,
 				FE6DEA21187C6FF900EFA21E /* sramMapperS1985.c in Sources */,
-				FE6DE95F187C6FF800EFA21E /* CMEvent.m in Sources */,
+				FE6DE95F187C6FF800EFA21E /* CocoaEvent.c in Sources */,
 				FE6DE9B3187C6FF800EFA21E /* AtmelPerom.c in Sources */,
 				FE6DEA1F187C6FF900EFA21E /* sramMapperMatsuchita.c in Sources */,
 				FE6DE9DE187C6FF800EFA21E /* romMapperKonami4.c in Sources */,

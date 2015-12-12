@@ -2,7 +2,7 @@
  **
  ** CocoaMSX: MSX Emulator for Mac OS X
  ** http://www.cocoamsx.com
- ** Copyright (C) 2012-2014 Akop Karapetyan
+ ** Copyright (C) 2012-2015 Akop Karapetyan
  **
  ** This program is free software; you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -20,22 +20,51 @@
  **
  ******************************************************************************
  */
-#import <Foundation/Foundation.h>
 
-typedef void (* CMThreadEntryPoint)();
+#include <stdlib.h>
 
-@class CMThreadArg;
+#include "ArchEvent.h"
 
-@interface CMThread : NSObject
+typedef struct {
+    void *eventSem;
+    void *lockSem;
+    int   state;
+} Event;
+
+void * archEventCreate(int initState)
 {
-    CMThreadArg     *arg;
-    pthread_attr_t  attr;
-    pthread_t       posixThreadID;
+    Event *e = calloc(1, sizeof(Event));
+    if (e != NULL) {
+        e->state = initState ? 1 : 0;
+        e->lockSem  = archSemaphoreCreate(1);
+        e->eventSem  = archSemaphoreCreate(e->state);
+    }
+    
+    return e;
 }
 
-- (id)initWithEntryPoint:(CMThreadEntryPoint)entryPoint;
-- (void)start;
-- (void)join;
-+ (void)sleepMilliseconds:(NSInteger)ms;
+void archEventDestroy(void *event)
+{
+    Event *e = (Event *) event;
+    
+    archSemaphoreDestroy(e->lockSem);
+    archSemaphoreDestroy(e->eventSem);
+    
+    free(e);
+}
 
-@end
+void archEventSet(void *event)
+{
+    Event *e = (Event *) event;
+    if (e->state == 0) {
+        e->state = 1;
+        archSemaphoreSignal(e->eventSem);
+    }
+}
+
+void archEventWait(void *event, int timeout)
+{
+    Event *e = (Event *) event;
+    archSemaphoreWait(e->eventSem, timeout);
+    e->state = 0;
+}
