@@ -577,24 +577,24 @@ static int framebufferScanline = 0;
     return YES;
 }
 
-- (BOOL)saveStateToFileAtPath:(NSString *)fileName
+- (void)saveStateToFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
 {
     emulatorSuspend();
-    boardSaveState([fileName UTF8String], 1);
+    boardSaveState([fileName fileSystemRepresentation], 1);
     emulatorResume();
 
-    return YES;
+    block(YES, nil);
 }
 
-- (BOOL)loadStateFromFileAtPath:(NSString *)fileName
+- (void)loadStateFromFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 200 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
         emulatorSuspend();
         emulatorStop();
-        emulatorStart([fileName UTF8String]);
-    });
+        emulatorStart([fileName fileSystemRepresentation]);
 
-    return YES;
+        block(YES, nil);
+    });
 }
 
 #pragma mark - OE Video
