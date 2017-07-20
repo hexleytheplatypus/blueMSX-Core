@@ -1705,6 +1705,7 @@
 				FED62A3F187BD5D700A88500 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		FED62A3F187BD5D700A88500 /* Products */ = {
 			isa = PBXGroup;
