@@ -619,7 +619,7 @@ static int framebufferScanline = 0;
         if (!_videoBuffer) _videoBuffer = (uint32_t *)malloc(FB_MAX_WIDTH * FB_MAX_HEIGHT * sizeof(uint32_t));
         hint = _videoBuffer;
     }
-    return hint;
+    return _videoBuffer = (uint32_t *)hint;
 }
 
 - (GLenum)pixelFormat
