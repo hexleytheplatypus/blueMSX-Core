@@ -92,7 +92,6 @@ static int framebufferScanline = 0;
 {
     if ((self = [super init]))
     {
-        _videoBuffer = (uint32_t *)malloc(FB_MAX_WIDTH * FB_MAX_HEIGHT * sizeof(uint32_t));
         _videoWidth =  272;
         _videoHeight =  240;
         _isDoubleWidth = NO;
@@ -614,9 +613,13 @@ static int framebufferScanline = 0;
     return OEIntSizeMake(256 * (8.0/7.0), 240);
 }
 
-- (const void *)videoBuffer
+- (const void *)getVideoBufferWithHint:(void *)hint
 {
-    return _videoBuffer;
+    if (!hint) {
+        if (!_videoBuffer) _videoBuffer = (uint32_t *)malloc(FB_MAX_WIDTH * FB_MAX_HEIGHT * sizeof(uint32_t));
+        hint = _videoBuffer;
+    }
+    return hint;
 }
 
 - (GLenum)pixelFormat
@@ -627,11 +630,6 @@ static int framebufferScanline = 0;
 - (GLenum)pixelType
 {
     return GL_UNSIGNED_INT_8_8_8_8_REV;
-}
-
-- (GLenum)internalPixelFormat
-{
-    return GL_RGB8;
 }
 
 #pragma mark - OE Audio
