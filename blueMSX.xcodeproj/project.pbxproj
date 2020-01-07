@@ -886,14 +886,14 @@
 		FEB03AF0187BEE8C000FDDCF /* OEMSXSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEMSXSystemResponderClient.h; path = ../OpenEmu/MSX/OEMSXSystemResponderClient.h; sourceTree = "<group>"; };
 		FEB03AF1187BEF33000FDDCF /* blueMSXGameCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blueMSXGameCore.h; sourceTree = "<group>"; };
 		FEB03AF2187BEF33000FDDCF /* blueMSXGameCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blueMSXGameCore.m; sourceTree = "<group>"; };
-		FEB03AF4187BF6F6000FDDCF /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEmuBase.framework; path = "../../../Library/Developer/Xcode/DerivedData/OpenEmu-ebwcwaohrneqtmcmlxkmguipkwal/Build/Products/Debug/OpenEmuBase.framework"; sourceTree = "<group>"; };
+		FEB03AF4187BF6F6000FDDCF /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEmuBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FED62A3E187BD5D700A88500 /* blueMSX.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blueMSX.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		FED62A41187BD5D700A88500 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FED62A44187BD5D700A88500 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FED62A45187BD5D700A88500 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		FED62A46187BD5D700A88500 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		FED62A49187BD5D700A88500 /* blueMSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "blueMSX-Info.plist"; sourceTree = "<group>"; };
-		FED62A4B187BD5D700A88500 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FED62A4B187BD5D700A88500 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FEE6DD9E199551030015EC0F /* Microchip24x00.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Microchip24x00.c; sourceTree = "<group>"; };
 		FEE6DD9F199551030015EC0F /* Microchip24x00.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Microchip24x00.h; sourceTree = "<group>"; };
 		FEE6DDA1199551600015EC0F /* romMapperMuPack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = romMapperMuPack.c; sourceTree = "<group>"; };
@@ -1777,7 +1777,7 @@
 			};
 			buildConfigurationList = FED62A39187BD5D700A88500 /* Build configuration list for PBXProject "blueMSX" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
