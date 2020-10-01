@@ -316,7 +316,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8781C03B1BF4019800EA8EFB /* OEColecoVisionSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEColecoVisionSystemResponderClient.h; path = ../OpenEmu/ColecoVision/OEColecoVisionSystemResponderClient.h; sourceTree = "<group>"; };
+		8781C03B1BF4019800EA8EFB /* OEColecoVisionSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEColecoVisionSystemResponderClient.h; path = ../OpenEmu/SystemPlugins/ColecoVision/OEColecoVisionSystemResponderClient.h; sourceTree = "<group>"; };
 		FE1D7B721880671D00472D7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		FE6DE700187C6FF600EFA21E /* ArchBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchBitmap.h; sourceTree = "<group>"; };
 		FE6DE701187C6FF600EFA21E /* ArchCdrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchCdrom.h; sourceTree = "<group>"; };
@@ -883,7 +883,7 @@
 		FE6DE950187C6FF800EFA21E /* R800SaveState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R800SaveState.h; sourceTree = "<group>"; };
 		FEA841A7187F288F00F5CD6D /* Machines */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Machines; sourceTree = "<group>"; };
 		FEA841A9187F307200F5CD6D /* Databases */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Databases; sourceTree = "<group>"; };
-		FEB03AF0187BEE8C000FDDCF /* OEMSXSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEMSXSystemResponderClient.h; path = ../OpenEmu/MSX/OEMSXSystemResponderClient.h; sourceTree = "<group>"; };
+		FEB03AF0187BEE8C000FDDCF /* OEMSXSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEMSXSystemResponderClient.h; path = ../OpenEmu/SystemPlugins/MSX/OEMSXSystemResponderClient.h; sourceTree = "<group>"; };
 		FEB03AF1187BEF33000FDDCF /* blueMSXGameCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blueMSXGameCore.h; sourceTree = "<group>"; };
 		FEB03AF2187BEF33000FDDCF /* blueMSXGameCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blueMSXGameCore.m; sourceTree = "<group>"; };
 		FEB03AF4187BF6F6000FDDCF /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEmuBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
