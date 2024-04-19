@@ -292,7 +292,6 @@
 		FEA841AA187F307200F5CD6D /* Databases in Resources */ = {isa = PBXBuildFile; fileRef = FEA841A9187F307200F5CD6D /* Databases */; };
 		FEB03AF3187BEF33000FDDCF /* blueMSXGameCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB03AF2187BEF33000FDDCF /* blueMSXGameCore.m */; };
 		FEB03AF5187BF6F6000FDDCF /* OpenEmuBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB03AF4187BF6F6000FDDCF /* OpenEmuBase.framework */; };
-		FED62A42187BD5D700A88500 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FED62A41187BD5D700A88500 /* Cocoa.framework */; };
 		FED62A4C187BD5D700A88500 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FED62A4A187BD5D700A88500 /* InfoPlist.strings */; };
 		FEE6DDA0199551030015EC0F /* Microchip24x00.c in Sources */ = {isa = PBXBuildFile; fileRef = FEE6DD9E199551030015EC0F /* Microchip24x00.c */; };
 		FEE6DDB1199551600015EC0F /* romMapperMuPack.c in Sources */ = {isa = PBXBuildFile; fileRef = FEE6DDA1199551600015EC0F /* romMapperMuPack.c */; };
@@ -920,7 +919,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEB03AF5187BF6F6000FDDCF /* OpenEmuBase.framework in Frameworks */,
-				FED62A42187BD5D700A88500 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
